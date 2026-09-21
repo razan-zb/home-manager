@@ -1,0 +1,82 @@
+:root {
+    --green-900: #1d4b3e;
+    --green-700: #2e6b58;
+    --card-bg: #2b2b2b;
+    --page-bg: #242424;
+    --text: #f2f2f2;
+    --text-dim: #9aa0a6;
+    --accent: #f5b529;
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, system-ui, sans-serif;
+}
+
+.app {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 96px;
+}
+
+
+.app__header {
+    background: var(--green-900);
+    padding: 18px 20px 26px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    text-align: center;
+}
+
+.app__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app__lang {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 0;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.app__total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app__total-label {
+    font-size: 12px;
+    color: #cfe3db;
+}
+
+.app__total-value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.app__title {
+    margin: 14px 0 0;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #dfe9e4;
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+.app__body {
+    padding: 16px;
+}

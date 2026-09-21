@@ -1,0 +1,26 @@
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    gap: 4px;
+    background: var(--card-bg);
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin: -14px 16px 0;
+    padding: 10px 6px 0;
+}
+
+.tabs__btn {
+    flex: 1;
+    background: none;
+    border: 0;
+    color: var(--text-dim);
+    font-size: 14px;
+    padding: 8px 4px 12px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+    .tabs__btn.is-active {
+        color: #5fd0a5;
+        border-bottom-color: #5fd0a5;
+        font-weight: 600;
+    }
