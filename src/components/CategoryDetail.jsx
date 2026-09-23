@@ -1,4 +1,5 @@
 import './CategoryDetail.css';
+export default function CategoryDetail({ category, t, onBack, onDelete }) {
 
 export default function CategoryDetail({ category, t, onBack }) {
     if (!category) return null;
@@ -22,9 +23,20 @@ export default function CategoryDetail({ category, t, onBack }) {
                             {r.note || t.noNote}
                         </span>
                         <span className="detail__date">{formatDate(r.date)}</span>
+                        <button
+                            className="detail__delete"
+                            onClick={() => {
+                                if (confirm(t.confirmDelete)) onDelete(r.id);
+                            }}
+
+                            aria-label={t.delete}
+                        >
+                            🗑
+                        </button>
                     </li>
                 ))}
             </ul>
+
         </div>
     );
 }

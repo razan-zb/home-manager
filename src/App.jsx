@@ -27,6 +27,11 @@ export default function App() {
     const t = strings[lang];
     const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
+
+    function deleteRecord(id) {
+        setRecords((prev) => prev.filter((r) => r.id !== id));
+    }
+
     useEffect(() => {
         document.documentElement.lang = lang;
         document.documentElement.dir = dir;
@@ -91,7 +96,9 @@ export default function App() {
                         category={rows.find((r) => r.category === selected)}
                         t={t}
                         onBack={() => setSelected(null)}
+                        onDelete={deleteRecord}
                     />
+
                 ) : (
                     <CategoryList rows={rows} t={t} onSelect={setSelected} />
                 )}

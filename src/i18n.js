@@ -14,6 +14,7 @@ export const strings = {
         empty: 'ما في تسجيلات بهالفترة',
         newCategory: 'فئة جديدة',
         noNote: 'بدون ملاحظة', 
+        delete: 'حذف',   
     },
     en: {
         appTitle: 'Home Log',
@@ -29,6 +30,7 @@ export const strings = {
         times: 'times',
         empty: 'No entries in this period',
         newCategory: 'New category',
-        noNote: 'No note', 
+        noNote: 'No note',
+        delete: 'Delete', 
     },
 };

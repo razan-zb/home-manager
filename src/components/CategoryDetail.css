@@ -43,6 +43,20 @@
     border-radius: var(--radius);
     padding: 14px 18px;
 }
+.detail__delete {
+    background: none;
+    border: 0;
+    color: #e05555;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-inline-start: 8px;
+}
+
+    .detail__delete:hover {
+        color: #ff6b6b;
+    }
+
 
 .detail__note {
     font-size: 15px;
