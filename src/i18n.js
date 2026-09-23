@@ -13,6 +13,7 @@ export const strings = {
         times: 'مرة',
         empty: 'ما في تسجيلات بهالفترة',
         newCategory: 'فئة جديدة',
+        noNote: 'بدون ملاحظة', 
     },
     en: {
         appTitle: 'Home Log',
@@ -28,5 +29,6 @@ export const strings = {
         times: 'times',
         empty: 'No entries in this period',
         newCategory: 'New category',
+        noNote: 'No note', 
     },
 };

@@ -1,0 +1,54 @@
+.detail__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.detail__back {
+    background: var(--card-bg);
+    border: 0;
+    color: var(--text);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.detail__title {
+    margin: 0;
+    font-size: 20px;
+    flex: 1;
+}
+
+.detail__total {
+    color: var(--text-dim);
+    font-size: 14px;
+}
+
+.detail__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.detail__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+}
+
+.detail__note {
+    font-size: 15px;
+}
+
+.detail__date {
+    font-size: 13px;
+    color: var(--text-dim);
+}

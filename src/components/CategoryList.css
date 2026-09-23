@@ -13,6 +13,10 @@
     background: var(--card-bg);
     border-radius: var(--radius);
     padding: 16px 18px;
+    width: 100%;
+    text-align: inherit;
+    font: inherit;
+    color: inherit;
 }
 
 .list__name {

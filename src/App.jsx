@@ -4,6 +4,8 @@ import PeriodTabs from './components/PeriodTabs.jsx';
 import AddButton from './components/AddButton.jsx';
 import AddModal from './components/AddModal.jsx';
 import CategoryList from './components/CategoryList.jsx';
+import CategoryDetail from './components/CategoryDetail.jsx';
+
 import { strings } from './i18n';
 
 const STORAGE_KEY = 'home-manager-records';
@@ -12,6 +14,8 @@ export default function App() {
     const [lang, setLang] = useState('ar');        // الأساس عربي
     const [period, setPeriod] = useState('day');
     const [showModal, setShowModal] = useState(false);
+    const [selected, setSelected] = useState(null); // اسم الفئة المفتوحة
+
     const [records, setRecords] = useState(() => {
         try {
             return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -32,18 +36,23 @@ export default function App() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     }, [records]);
 
-    // فلترة حسب الفترة + التجميع
     const rows = useMemo(() => {
         const from = periodStart(period);
         const inRange = records.filter((r) => new Date(r.date) >= from);
 
-        const counts = {};
+        const groups = {};
         for (const r of inRange) {
-            counts[r.category] = (counts[r.category] || 0) + 1;
+            if (!groups[r.category]) groups[r.category] = [];
+            groups[r.category].push(r);
         }
-        return Object.entries(counts)
-            .sort((a, b) => b[1] - a[1])
-            .map(([category, count]) => ({ category, count }));
+
+        return Object.entries(groups)
+            .map(([category, items]) => ({
+                category,
+                count: items.length,
+                items: items.sort((a, b) => new Date(b.date) - new Date(a.date)), // الأحدث أول
+            }))
+            .sort((a, b) => b.count - a.count);
     }, [records, period]);
 
     const total = rows.reduce((sum, r) => sum + r.count, 0);
@@ -77,8 +86,17 @@ export default function App() {
             <PeriodTabs period={period} onChange={setPeriod} t={t} />
 
             <main className="app__body">
-                <CategoryList rows={rows} t={t} />
+                {selected ? (
+                    <CategoryDetail
+                        category={rows.find((r) => r.category === selected)}
+                        t={t}
+                        onBack={() => setSelected(null)}
+                    />
+                ) : (
+                    <CategoryList rows={rows} t={t} onSelect={setSelected} />
+                )}
             </main>
+
 
             <AddButton onClick={() => setShowModal(true)} label={t.add} />
 
