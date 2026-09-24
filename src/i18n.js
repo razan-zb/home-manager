@@ -13,8 +13,15 @@ export const strings = {
         times: 'مرة',
         empty: 'ما في تسجيلات بهالفترة',
         newCategory: 'فئة جديدة',
-        noNote: 'بدون ملاحظة', 
-        delete: 'حذف',   
+        noNote: 'بدون ملاحظة',
+        delete: 'حذف',
+        confirmDelete: 'متأكد إنك بدك تحذف؟ ما في رجعة.',
+        daysMarried: 'زواجنا',
+        yearUnit: 'سنة',
+        monthUnit: 'شهر',
+        dayUnit: 'يوم',
+        listJoin: ' و',
+
     },
     en: {
         appTitle: 'Home Log',
@@ -31,6 +38,13 @@ export const strings = {
         empty: 'No entries in this period',
         newCategory: 'New category',
         noNote: 'No note',
-        delete: 'Delete', 
+        delete: 'Delete',
+        confirmDelete: 'Delete this entry? This cannot be undone.',
+        daysMarried: 'Married for',
+        yearUnit: 'yr',
+        monthUnit: 'mo',
+        dayUnit: 'day',
+        listJoin: ', ',
+
     },
 };
