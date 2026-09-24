@@ -42,23 +42,20 @@ export default function App() {
     }, [records]);
 
     const rows = useMemo(() => {
-        const from = periodStart(period);
-        const inRange = records.filter((r) => new Date(r.date) >= from);
+        const { from, to } = periodRange(period);
+        const inRange = records.filter((r) => {
+            const d = toLocalDate(r.date);
+            return d >= from && d <= to;
+        });
 
         const groups = {};
         for (const r of inRange) {
             if (!groups[r.category]) groups[r.category] = [];
             groups[r.category].push(r);
         }
-
-        return Object.entries(groups)
-            .map(([category, items]) => ({
-                category,
-                count: items.length,
-                items: items.sort((a, b) => new Date(b.date) - new Date(a.date)), // الأحدث أول
-            }))
-            .sort((a, b) => b.count - a.count);
+        // ... باقي التجميع زي ما هو
     }, [records, period]);
+
 
     const WEDDING = new Date(2026, 7, 4); // 4 أغسطس 2026 — الشهر يبدأ من 0 فـ 7 = آب
 
@@ -125,13 +122,44 @@ export default function App() {
     );
 }
 
-// بداية الفترة المختارة (من اليوم الحالي للخلف)
-function periodStart(period) {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    if (period === 'day') return d;
-    if (period === 'week') d.setDate(d.getDate() - 7);
-    else if (period === 'month') d.setMonth(d.getMonth() - 1);
-    else if (period === 'year') d.setFullYear(d.getFullYear() - 1);
-    return d;
+// يرجع تاريخ محلي صافي (بلا UTC) — يحل مشكلة إزاحة اليوم
+function toLocalDate(iso) {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d);
+}
+
+// يرجع مجال الفترة: { from, to } — كلاهما شاملان
+function periodRange(period) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (period === 'day') {
+        return { from: today, to: today };
+    }
+
+    if (period === 'week') {
+        // الأسبوع يبدأ أحد (0) وينتهي سبت (6)
+        const day = today.getDay();              // 0=أحد … 6=سبت
+        const from = new Date(today);
+        from.setDate(today.getDate() - day);     // رجوع للأحد
+        const to = new Date(from);
+        to.setDate(from.getDate() + 6);          // السبت
+        return { from, to };
+    }
+
+    if (period === 'month') {
+        // نفس الشهر الحالي (أول يوم ← آخر يوم)
+        const from = new Date(today.getFullYear(), today.getMonth(), 1);
+        const to = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        return { from, to };
+    }
+
+    if (period === 'year') {
+        // نفس السنة الحالية
+        const from = new Date(today.getFullYear(), 0, 1);
+        const to = new Date(today.getFullYear(), 11, 31);
+        return { from, to };
+    }
+
+    return { from: today, to: today };
 }
