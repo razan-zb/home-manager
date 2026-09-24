@@ -1,7 +1,6 @@
 import './CategoryDetail.css';
-export default function CategoryDetail({ category, t, onBack, onDelete }) {
 
-export default function CategoryDetail({ category, t, onBack }) {
+    export default function CategoryDetail({ category, t, onBack, onDelete }) {
     if (!category) return null;
 
     return (
@@ -28,11 +27,11 @@ export default function CategoryDetail({ category, t, onBack }) {
                             onClick={() => {
                                 if (confirm(t.confirmDelete)) onDelete(r.id);
                             }}
-
                             aria-label={t.delete}
                         >
                             🗑
                         </button>
+
                     </li>
                 ))}
             </ul>

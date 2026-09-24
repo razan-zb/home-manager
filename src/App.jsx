@@ -60,7 +60,14 @@ export default function App() {
             .sort((a, b) => b.count - a.count);
     }, [records, period]);
 
-    const total = rows.reduce((sum, r) => sum + r.count, 0);
+    const WEDDING = new Date(2026, 7, 4); // 4 أغسطس 2026 — الشهر يبدأ من 0 فـ 7 = آب
+
+    const total = useMemo(() => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const ms = today - WEDDING;
+        return Math.floor(ms / (1000 * 60 * 60 * 24)); // عدد الأيام الكاملة
+    }, []);
 
     function addRecord(record) {
         setRecords((prev) => [
