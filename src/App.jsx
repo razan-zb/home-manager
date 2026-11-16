@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import LogPage from './pages/LogPage';
-import SalonPage from './pages/SalonPage';
-import WorkerPage from './pages/WorkerPage';
-import MonthPage from './pages/MonthPage';
+import HomePage from './Pages/HomePage';
+import LogPage from './Pages/LogPage';
+import SalonPage from './Pages/SalonPage';
+import WorkerPage from './Pages/WorkerPage';
+import MonthPage from './Pages/MonthPage';
 
 const WORKERS_KEY = 'home-manager-workers';
 
