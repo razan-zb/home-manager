@@ -35,6 +35,8 @@ export const strings = {
         backToWork: 'رجع للشغل',
         beforeStart: 'قبل القدوم',
         weekdays: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+        leaveFrom: 'من تاريخ',
+        leaveTo: 'إلى تاريخ',
 
 
     },
@@ -74,6 +76,8 @@ export const strings = {
         backToWork: 'Back to work',
         beforeStart: 'Before start',
         weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        leaveFrom: 'From',
+        leaveTo: 'To',
 
 
     },

@@ -22,7 +22,8 @@ export default function App() {
         localStorage.setItem(WORKERS_KEY, JSON.stringify(workers));
     }, [workers]);
 
-    /* ---------- الدوال ---------- */
+    /* ---------- الدوال (كلها جوّا المكوّن) ---------- */
+
     function addWorker(worker) {
         setWorkers((prev) => [
             ...prev,
@@ -61,18 +62,22 @@ export default function App() {
         );
     }
 
-    // "رجع" — يقفل آخر عطلة عند تاريخ
-    function endLeave(id, iso) {
+    // يحذف فترة عطلة محددة
+    function removeLeave(id, from, to) {
         setWorkers((prev) =>
-            prev.map((w) => {
-                if (w.id !== id) return w;
-                const leaves = [...(w.leaves || [])];
-                const last = leaves[leaves.length - 1];
-                if (last) leaves[leaves.length - 1] = { ...last, to: iso };
-                return { ...w, leaves };
-            })
+            prev.map((w) =>
+                w.id === id
+                    ? {
+                        ...w,
+                        leaves: (w.leaves || []).filter(
+                            (l) => !(l.from === from && l.to === to)
+                        ),
+                    }
+                    : w
+            )
         );
     }
+
 
     /* ---------- الراوتر ---------- */
     return (
@@ -96,8 +101,9 @@ export default function App() {
                             toggleDay={toggleDay}
                             editWorker={editWorker}
                             addLeave={addLeave}
-                            endLeave={endLeave}
+                            removeLeave={removeLeave}
                         />
+
                     }
                 />
             </Routes>

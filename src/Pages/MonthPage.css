@@ -127,3 +127,85 @@
     background: none;
     border: 0;
 }
+
+.month__leave {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.month__leave-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.month__leave-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+    .month__leave-field input {
+        background: #1e1e1e;
+        border: 1px solid #3a3a3a;
+        border-radius: 8px;
+        padding: 8px;
+        color: var(--text);
+        font-size: 13px;
+    }
+
+.month__actions {
+    display: flex;
+    gap: 10px;
+}
+
+.month__act {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.month__act--leave {
+    background: #5a2a2a;
+    color: #ff9a9a;
+}
+
+.month__act--back {
+    background: #2e6b58;
+    color: #fff;
+}
+
+.month__leaves {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+}
+
+.month__leave-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #2b2222;
+    border: 1px solid #4a2a2a;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.month__leave-del {
+    background: none;
+    border: 0;
+    color: #e05555;
+    cursor: pointer;
+    font-size: 15px;
+}
