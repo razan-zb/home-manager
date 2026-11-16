@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './MonthPage.css';
 import { strings } from '../i18n';
@@ -8,16 +7,13 @@ export default function MonthPage({
     workers,
     toggleDay,
     editWorker,
-    addLeave,
-    removeLeave,
+    goOnLeave,
+    backToWork,
 }) {
     const t = strings['ar'];
     const { id, month } = useParams();
     const navigate = useNavigate();
     const worker = workers.find((w) => w.id === id);
-
-    const [leaveFrom, setLeaveFrom] = useState('');
-    const [leaveTo, setLeaveTo] = useState('');
 
     if (!worker) {
         return (
@@ -47,17 +43,7 @@ export default function MonthPage({
         rows.push({ d, iso, value, reason, isFuture });
     }
 
-    const monthLeaves = (worker.leaves || []).filter((l) =>
-        l.from.startsWith(month) || l.to.startsWith(month)
-    );
-
-    function submitLeave(e) {
-        e.preventDefault();
-        if (!leaveFrom) return;
-        addLeave(id, leaveFrom, leaveTo || leaveFrom);
-        setLeaveFrom('');
-        setLeaveTo('');
-    }
+    const lastDayIso = `${month}-${String(daysInMonth).padStart(2, '0')}`;
 
     return (
         <div className="app">
@@ -92,63 +78,28 @@ export default function MonthPage({
                     />
                 </label>
 
-                <form className="month__leave" onSubmit={submitLeave}>
-                    <div className="month__leave-row">
-                        <label className="month__leave-field">
-                            <span>{t.leaveFrom}</span>
-                            <input
-                                type="date"
-                                value={leaveFrom}
-                                onChange={(e) => setLeaveFrom(e.target.value)}
-                            />
-                        </label>
-                        <label className="month__leave-field">
-                            <span>{t.leaveTo}</span>
-                            <input
-                                type="date"
-                                value={leaveTo}
-                                onChange={(e) => setLeaveTo(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                    <div className="month__actions">
-                        <button type="submit" className="month__act month__act--leave">
+                <div className="month__status">
+                    {worker.onLeave ? (
+                        <>
+                            <span className="month__badge is-leave">
+                                {t.onLeaveSince} {worker.leaveFrom}
+                            </span>
+                            <button
+                                className="month__act month__act--back"
+                                onClick={() => backToWork(id, lastDayIso)}
+                            >
+                                {t.backToWork}
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            className="month__act month__act--leave"
+                            onClick={() => goOnLeave(id, `${month}-01`)}
+                        >
                             {t.takeLeave}
                         </button>
-                        <button
-                            type="button"
-                            className="month__act month__act--back"
-                            onClick={() => {
-                                if (leaveFrom) {
-                                    addLeave(id, leaveFrom, leaveTo || leaveFrom);
-                                    setLeaveFrom('');
-                                    setLeaveTo('');
-                                }
-                            }}
-                        >
-                            {t.backToWork}
-                        </button>
-                    </div>
-                </form>
-
-                {monthLeaves.length > 0 && (
-                    <ul className="month__leaves">
-                        {monthLeaves.map((l, i) => (
-                            <li key={`${l.from}-${l.to}-${i}`} className="month__leave-item">
-                                <span>
-                                    {l.from} ← {l.to}
-                                </span>
-                                <button
-                                    className="month__leave-del"
-                                    onClick={() => removeLeave(id, l.from, l.to)}
-                                    aria-label={t.delete}
-                                >
-                                    🗑
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                    )}
+                </div>
 
                 <div className="month__weekdays">
                     {t.weekdays.map((wd) => (

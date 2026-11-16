@@ -37,7 +37,7 @@ export const strings = {
         weekdays: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
         leaveFrom: 'من تاريخ',
         leaveTo: 'إلى تاريخ',
-
+        onLeaveSince: 'بعطلة من',
 
     },
     en: {
@@ -78,6 +78,7 @@ export const strings = {
         weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         leaveFrom: 'From',
         leaveTo: 'To',
+        onLeaveSince: 'On leave since',
 
 
     },

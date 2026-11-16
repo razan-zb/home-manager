@@ -209,3 +209,43 @@
     cursor: pointer;
     font-size: 15px;
 }
+
+
+.month__status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.month__badge {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+}
+
+    .month__badge.is-leave {
+        background: #5a2a2a;
+        color: #ff9a9a;
+    }
+
+.month__act {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.month__act--leave {
+    background: #5a2a2a;
+    color: #ff9a9a;
+}
+
+.month__act--back {
+    background: #2e6b58;
+    color: #fff;
+}

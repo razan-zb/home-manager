@@ -51,29 +51,24 @@ export default function App() {
         );
     }
 
-    // يضيف فترة عطلة من تاريخ لتاريخ
-    function addLeave(id, from, to = from) {
+
+
+    // العامل طلع عطلة
+    function goOnLeave(id, fromIso) {
         setWorkers((prev) =>
             prev.map((w) =>
                 w.id === id
-                    ? { ...w, leaves: [...(w.leaves || []), { from, to }] }
+                    ? { ...w, onLeave: true, leaveFrom: fromIso, backDate: null }
                     : w
             )
         );
     }
 
-    // يحذف فترة عطلة محددة
-    function removeLeave(id, from, to) {
+    // العامل رجع — كل شي من backDate لآخر يرجع طبيعي
+    function backToWork(id, iso) {
         setWorkers((prev) =>
             prev.map((w) =>
-                w.id === id
-                    ? {
-                        ...w,
-                        leaves: (w.leaves || []).filter(
-                            (l) => !(l.from === from && l.to === to)
-                        ),
-                    }
-                    : w
+                w.id === id ? { ...w, onLeave: false, backDate: iso } : w
             )
         );
     }
@@ -100,9 +95,10 @@ export default function App() {
                             workers={workers}
                             toggleDay={toggleDay}
                             editWorker={editWorker}
-                            addLeave={addLeave}
-                            removeLeave={removeLeave}
+                            goOnLeave={goOnLeave}
+                            backToWork={backToWork}
                         />
+
 
                     }
                 />
