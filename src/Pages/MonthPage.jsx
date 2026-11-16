@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './MonthPage.css';
 import { strings } from '../i18n';
@@ -14,6 +15,11 @@ export default function MonthPage({
     const { id, month } = useParams();
     const navigate = useNavigate();
     const worker = workers.find((w) => w.id === id);
+
+    // تاريخ بداية العطلة اللي تختاريه أنت
+    const [leaveDate, setLeaveDate] = useState(`${month}-01`);
+    // تاريخ الرجوع
+    const [backDate, setBackDate] = useState(`${month}-01`);
 
     if (!worker) {
         return (
@@ -42,8 +48,6 @@ export default function MonthPage({
         if (value === 1 && !isFuture) worked++;
         rows.push({ d, iso, value, reason, isFuture });
     }
-
-    const lastDayIso = `${month}-${String(daysInMonth).padStart(2, '0')}`;
 
     return (
         <div className="app">
@@ -78,26 +82,46 @@ export default function MonthPage({
                     />
                 </label>
 
-                <div className="month__status">
+                <div className="month__leave-box">
                     {worker.onLeave ? (
                         <>
-                            <span className="month__badge is-leave">
-                                {t.onLeaveSince} {worker.leaveFrom}
-                            </span>
+                            <div className="month__status">
+                                <span className="month__badge is-leave">
+                                    {t.onLeaveSince} {worker.leaveFrom}
+                                </span>
+                            </div>
+                            <label className="month__leave-field">
+                                <span>{t.backDateLabel}</span>
+                                <input
+                                    type="date"
+                                    value={backDate}
+                                    onChange={(e) => setBackDate(e.target.value)}
+                                />
+                            </label>
                             <button
                                 className="month__act month__act--back"
-                                onClick={() => backToWork(id, lastDayIso)}
+                                onClick={() => backToWork(id, backDate)}
                             >
                                 {t.backToWork}
                             </button>
                         </>
                     ) : (
-                        <button
-                            className="month__act month__act--leave"
-                            onClick={() => goOnLeave(id, `${month}-01`)}
-                        >
-                            {t.takeLeave}
-                        </button>
+                        <>
+                            <label className="month__leave-field">
+                                <span>{t.leaveFromLabel}</span>
+                                <input
+                                    type="date"
+                                    value={leaveDate}
+                                    onChange={(e) => setLeaveDate(e.target.value)}
+                                />
+                            </label>
+                            <button
+                                className="month__act month__act--leave"
+                                onClick={() => goOnLeave(id, leaveDate)}
+                            >
+                                {t.takeLeave}
+                            </button>
+                        </>
                     )}
                 </div>
 
