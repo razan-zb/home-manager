@@ -38,6 +38,11 @@ export const strings = {
         leaveFrom: 'من تاريخ',
         leaveTo: 'إلى تاريخ',
         onLeaveSince: 'بعطلة من',
+        backFrom: 'رجع من',
+        clear: 'مسح',
+        deleteWorker: 'حذف العامل',
+        confirmShort: 'متأكد؟',
+        confirmDeleteWorker: 'متأكد إنك بدك تحذف العامل؟ كل سجلاته وشهوره رح تنحذف، وما في رجعة.',
 
     },
     en: {
@@ -79,6 +84,11 @@ export const strings = {
         leaveFrom: 'From',
         leaveTo: 'To',
         onLeaveSince: 'On leave since',
+        backFrom: 'Back from',
+        clear: 'Clear',
+        deleteWorker: 'Delete worker',
+        confirmDeleteWorker: 'Delete this worker? All their records will be removed. This cannot be undone.',
+        confirmShort: 'Sure?',
 
 
     },

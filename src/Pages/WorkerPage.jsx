@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './WorkerPage.css';
 import { strings } from '../i18n';
 import { monthSummary } from '../lib/days';
 
-export default function WorkerPage({ workers }) {
+export default function WorkerPage({ workers, onDelete }) {
     const t = strings['ar'];
     const { id } = useParams();
     const navigate = useNavigate();
+    const [confirming, setConfirming] = useState(false);
     const worker = workers.find((w) => w.id === id);
 
     if (!worker) {
@@ -21,6 +23,15 @@ export default function WorkerPage({ workers }) {
 
     const months = monthsSince(worker.startDate);
 
+    function handleDelete() {
+        if (!confirming) {
+            setConfirming(true);   // كبسة أولى: اسألي
+            return;
+        }
+        onDelete(id);              // كبسة تانية: احذفي
+        navigate('/salon');
+    }
+
     return (
         <div className="app">
             <header className="app__header">
@@ -32,8 +43,15 @@ export default function WorkerPage({ workers }) {
                         <span className="app__total-label">{t.dailyWage}</span>
                         <span className="app__total-value">{worker.dailyWage}</span>
                     </div>
-                    <span style={{ width: 44 }} />
+                    <button
+                        className={`app__delete ${confirming ? 'is-confirming' : ''}`}
+                        onClick={handleDelete}
+                        aria-label={t.deleteWorker}
+                    >
+                        {confirming ? t.confirmShort : '🗑'}
+                    </button>
                 </div>
+
                 <h1 className="app__title">{worker.name}</h1>
             </header>
 
@@ -81,6 +99,3 @@ function monthsSince(startIso) {
     }
     return out.reverse();
 }
-
-
-

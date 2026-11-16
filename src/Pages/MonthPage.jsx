@@ -10,15 +10,13 @@ export default function MonthPage({
     editWorker,
     goOnLeave,
     backToWork,
+    clearLeave,
 }) {
     const t = strings['ar'];
     const { id, month } = useParams();
     const navigate = useNavigate();
     const worker = workers.find((w) => w.id === id);
-
-    // تاريخ بداية العطلة اللي تختاريه أنت
     const [leaveDate, setLeaveDate] = useState(`${month}-01`);
-    // تاريخ الرجوع
     const [backDate, setBackDate] = useState(`${month}-01`);
 
     if (!worker) {
@@ -83,45 +81,47 @@ export default function MonthPage({
                 </label>
 
                 <div className="month__leave-box">
-                    {worker.onLeave ? (
-                        <>
-                            <div className="month__status">
-                                <span className="month__badge is-leave">
-                                    {t.onLeaveSince} {worker.leaveFrom}
-                                </span>
-                            </div>
-                            <label className="month__leave-field">
-                                <span>{t.backDateLabel}</span>
-                                <input
-                                    type="date"
-                                    value={backDate}
-                                    onChange={(e) => setBackDate(e.target.value)}
-                                />
-                            </label>
+                    <label className="month__leave-field">
+                        <span>{t.leaveFromLabel}</span>
+                        <input
+                            type="date"
+                            className="month__leave-input"
+                            value={worker.leaveFrom || leaveDate}
+                            onChange={(e) => {
+                                const iso = e.target.value;
+                                setLeaveDate(iso);
+                                if (iso) goOnLeave(id, iso);
+                            }}
+                        />
+                    </label>
+
+                    <label className="month__leave-field">
+                        <span>{t.backDateLabel}</span>
+                        <input
+                            type="date"
+                            className="month__leave-input"
+                            value={worker.backFrom || backDate}
+                            onChange={(e) => {
+                                const iso = e.target.value;
+                                setBackDate(iso);
+                                if (iso) backToWork(id, iso);
+                            }}
+                        />
+                    </label>
+
+                    {(worker.leaveFrom || worker.backFrom) && (
+                        <div className="month__status">
+                            <span className="month__badge is-leave">
+                                {worker.leaveFrom && `${t.onLeaveSince} ${worker.leaveFrom}`}
+                                {worker.backFrom && ` · ${t.backFrom} ${worker.backFrom}`}
+                            </span>
                             <button
                                 className="month__act month__act--back"
-                                onClick={() => backToWork(id, backDate)}
+                                onClick={() => clearLeave(id)}
                             >
-                                {t.backToWork}
+                                {t.clear}
                             </button>
-                        </>
-                    ) : (
-                        <>
-                            <label className="month__leave-field">
-                                <span>{t.leaveFromLabel}</span>
-                                <input
-                                    type="date"
-                                    value={leaveDate}
-                                    onChange={(e) => setLeaveDate(e.target.value)}
-                                />
-                            </label>
-                            <button
-                                className="month__act month__act--leave"
-                                onClick={() => goOnLeave(id, leaveDate)}
-                            >
-                                {t.takeLeave}
-                            </button>
-                        </>
+                        </div>
                     )}
                 </div>
 

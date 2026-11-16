@@ -44,6 +44,10 @@ export default function App() {
             )
         );
     }
+    function deleteWorker(id) {
+        setWorkers((prev) => prev.filter((w) => w.id !== id));
+    }
+
 
     function editWorker(id, patch) {
         setWorkers((prev) =>
@@ -52,26 +56,29 @@ export default function App() {
     }
 
 
-
-    // العامل طلع عطلة
     function goOnLeave(id, fromIso) {
         setWorkers((prev) =>
             prev.map((w) =>
-                w.id === id
-                    ? { ...w, onLeave: true, leaveFrom: fromIso, backDate: null }
-                    : w
+                w.id === id ? { ...w, leaveFrom: fromIso, backFrom: null } : w
             )
         );
     }
 
-    // العامل رجع — كل شي من backDate لآخر يرجع طبيعي
     function backToWork(id, iso) {
         setWorkers((prev) =>
+            prev.map((w) => (w.id === id ? { ...w, backFrom: iso } : w))
+        );
+    }
+
+    function clearLeave(id) {
+        setWorkers((prev) =>
             prev.map((w) =>
-                w.id === id ? { ...w, onLeave: false, backDate: iso } : w
+                w.id === id ? { ...w, leaveFrom: null, backFrom: null } : w
             )
         );
     }
+
+
 
 
     /* ---------- الراوتر ---------- */
@@ -84,10 +91,13 @@ export default function App() {
                     path="/salon"
                     element={<SalonPage workers={workers} onAdd={addWorker} />}
                 />
+
+   
                 <Route
                     path="/salon/:id"
-                    element={<WorkerPage workers={workers} />}
+                    element={<WorkerPage workers={workers} onDelete={deleteWorker} />}
                 />
+
                 <Route
                     path="/salon/:id/:month"
                     element={
@@ -97,7 +107,10 @@ export default function App() {
                             editWorker={editWorker}
                             goOnLeave={goOnLeave}
                             backToWork={backToWork}
+                            clearLeave={clearLeave}
                         />
+
+
 
 
                     }

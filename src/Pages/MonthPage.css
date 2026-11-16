@@ -249,3 +249,63 @@
     background: #2e6b58;
     color: #fff;
 }
+
+.month__leave-box {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.month__leave-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.month__leave-input {
+    width: 100%;
+    background: #1e1e1e;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.month__status {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.month__badge {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+}
+
+    .month__badge.is-leave {
+        background: #5a2a2a;
+        color: #ff9a9a;
+    }
+
+.month__act {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.month__act--back {
+    background: #3a3a3a;
+    color: var(--text);
+}
