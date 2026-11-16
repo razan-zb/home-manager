@@ -1,0 +1,12 @@
+.list__item {
+    /* نفس ستايل القائمة المشترك — منقول هون كنسخة مخففة
+       إذا كان موجود بـ App.css، هذا يتجاوزه */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    color: inherit;
+    text-decoration: none;
+}

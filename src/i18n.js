@@ -21,6 +21,16 @@ export const strings = {
         monthUnit: 'شهر',
         dayUnit: 'يوم',
         listJoin: ' و',
+        salon: 'صالون ',
+        workersCount: 'عمّال',
+        noWorkers: 'ما في عمّال بعد',
+        addWorker: 'إضافة عامل',
+        workerName: 'الاسم',
+        dailyWage: 'أجر اليوم',
+        startDate: 'تاريخ البداية',
+        owed: 'المستحق',
+        daysShort: 'يوم',
+        notFound: 'مو موجود',
 
     },
     en: {
@@ -45,6 +55,17 @@ export const strings = {
         monthUnit: 'mo',
         dayUnit: 'day',
         listJoin: ', ',
+        salon: "My husband's salon",
+        workersCount: 'Workers',
+        noWorkers: 'No workers yet',
+        addWorker: 'Add worker',
+        workerName: 'Name',
+        dailyWage: 'Daily wage',
+        startDate: 'Start date',
+        owed: 'Owed',
+        daysShort: 'days',
+        notFound: 'Not found',
+
 
     },
 };
