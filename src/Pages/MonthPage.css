@@ -18,6 +18,33 @@
         text-align: center;
     }
 
+.month__actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.month__act {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .month__act:first-child {
+        background: #5a2a2a;
+        color: #ff9a9a;
+    }
+
+    .month__act:last-child {
+        background: #2e6b58;
+        color: #fff;
+    }
+
 .month__days {
     list-style: none;
     margin: 0;
@@ -37,17 +64,28 @@
     gap: 4px;
 }
 
-    .month__day.is-worked {
-        border: 1px solid #2e6b58;
-    }
+.month__day--work .month__toggle {
+    background: #2e6b58;
+    color: #fff;
+}
 
-    .month__day.is-off {
-        opacity: 0.6;
-    }
+.month__day--before .month__toggle,
+.month__day--leave .month__toggle,
+.month__day--holiday .month__toggle,
+.month__day--manual.is-off .month__toggle {
+    background: #5a2a2a;
+    color: #ff9a9a;
+}
 
-    .month__day.is-holiday {
-        background: #332b2b;
-    }
+.month__day--before,
+.month__day--leave {
+    background: #2b2222;
+    border: 1px solid #4a2a2a;
+}
+
+.month__day--leave {
+    border-color: #8a3a3a;
+}
 
 .month__num {
     font-size: 12px;
@@ -62,16 +100,30 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    background: #2e6b58;
-    color: #fff;
-}
-
-.month__day.is-off .month__toggle {
     background: #3a3a3a;
     color: var(--text-dim);
 }
 
-.month__toggle:disabled {
-    opacity: 0.35;
-    cursor: default;
+    .month__toggle:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+
+.month__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.month__weekday {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 4px 0;
+}
+
+.month__day--pad {
+    background: none;
+    border: 0;
 }

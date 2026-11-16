@@ -31,6 +31,11 @@ export const strings = {
         owed: 'المستحق',
         daysShort: 'يوم',
         notFound: 'مو موجود',
+        takeLeave: 'راح عطلة',
+        backToWork: 'رجع للشغل',
+        beforeStart: 'قبل القدوم',
+        weekdays: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+
 
     },
     en: {
@@ -65,6 +70,10 @@ export const strings = {
         owed: 'Owed',
         daysShort: 'days',
         notFound: 'Not found',
+        takeLeave: 'On leave',
+        backToWork: 'Back to work',
+        beforeStart: 'Before start',
+        weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 
 
     },

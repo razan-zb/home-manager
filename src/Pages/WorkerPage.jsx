@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './WorkerPage.css';
 import { strings } from '../i18n';
+import { monthSummary } from '../lib/days';
 
 export default function WorkerPage({ workers }) {
     const t = strings['ar'];
@@ -81,10 +82,5 @@ function monthsSince(startIso) {
     return out.reverse();
 }
 
-function monthSummary(worker, monthKey) {
-    let worked = 0;
-    for (const [date, v] of Object.entries(worker.days)) {
-        if (date.startsWith(monthKey) && v === 1) worked++;
-    }
-    return { worked, owed: worked * worker.dailyWage };
-}
+
+

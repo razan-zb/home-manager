@@ -30,6 +30,7 @@ export default function App() {
                 id: crypto.randomUUID(),
                 days: {},
                 offDays: [2],
+                leaves: [],
                 ...worker,
             },
         ]);
@@ -46,6 +47,30 @@ export default function App() {
     function editWorker(id, patch) {
         setWorkers((prev) =>
             prev.map((w) => (w.id === id ? { ...w, ...patch } : w))
+        );
+    }
+
+    // يضيف فترة عطلة من تاريخ لتاريخ
+    function addLeave(id, from, to = from) {
+        setWorkers((prev) =>
+            prev.map((w) =>
+                w.id === id
+                    ? { ...w, leaves: [...(w.leaves || []), { from, to }] }
+                    : w
+            )
+        );
+    }
+
+    // "رجع" — يقفل آخر عطلة عند تاريخ
+    function endLeave(id, iso) {
+        setWorkers((prev) =>
+            prev.map((w) => {
+                if (w.id !== id) return w;
+                const leaves = [...(w.leaves || [])];
+                const last = leaves[leaves.length - 1];
+                if (last) leaves[leaves.length - 1] = { ...last, to: iso };
+                return { ...w, leaves };
+            })
         );
     }
 
@@ -70,6 +95,8 @@ export default function App() {
                             workers={workers}
                             toggleDay={toggleDay}
                             editWorker={editWorker}
+                            addLeave={addLeave}
+                            endLeave={endLeave}
                         />
                     }
                 />
